@@ -12,7 +12,8 @@ public class FortuneTellerApp
 		double bankBalance = 0;
 		String vacationLocation = "";
 		String modeOfTransportation = "";
-		String quittingApp = "Quit";
+		String strAppQuit = "Quit";
+		String strTerminating = "Nobody likes a quitter... Terminating.";
 
 		// first name
 		System.out.println("Please enter your first name.");
@@ -20,33 +21,34 @@ public class FortuneTellerApp
 		try
 		{
 			String firstName = input.nextLine();
-			if (firstName.equalsIgnoreCase(quittingApp))
+			if (firstName.equalsIgnoreCase(strAppQuit))
 			{
-				System.out.println("Nobody likes a quitter...");
+				System.out.println(strTerminating);
 				System.exit(0);
 			}
 
 			// last name
 			System.out.println("Please enter your last name (sur name).");
 			String lastName = input.nextLine();
-			if (lastName.equalsIgnoreCase(quittingApp))
+			if (lastName.equalsIgnoreCase(strAppQuit))
 			{
-				System.out.println("Nobody likes a quitter...");
+				System.out.println(strTerminating);
 				System.exit(0);
 			}
 
 			// age
 			System.out.println("How old are you?");
 			String userAge = input.nextLine();
-			int parsedUserAge = Integer.parseInt(userAge);
-
-			if (userAge.equalsIgnoreCase(quittingApp))
+			
+			if (userAge.equalsIgnoreCase(strAppQuit))
 			{
-				System.out.println("Nobody likes a quitter...");
+				System.out.println(strTerminating);
 				System.exit(0);
 			}
 			else
 			{
+				int parsedUserAge = Integer.parseInt(userAge);
+				
 				if (parsedUserAge <= 1 || parsedUserAge > 90)
 				{
 					System.out.println("How are you alive?!");
@@ -64,15 +66,22 @@ public class FortuneTellerApp
 			// birth month && bank account
 			System.out.println("What is your birth month? Enter a number 1-12, January being 1.");
 			String birthMonth = input.nextLine();
-			int intBirthMonth = Integer.parseInt(birthMonth);
 
-			if (intBirthMonth > 12 || intBirthMonth <= 0 || birthMonth.equals(""))
+			if (birthMonth.equalsIgnoreCase(strAppQuit))
 			{
-				System.out.println("Birth month is not valid.\n" + "Only numbers 1 through 12 are applicable.");
+				System.out.println(strTerminating);
+				System.exit(0);
 			}
 			else
 			{
-				switch (intBirthMonth)
+				int parsedBirthMonth = Integer.parseInt(birthMonth);
+				
+				if (parsedBirthMonth > 12 || parsedBirthMonth <= 0 || birthMonth.equals(""))
+				{
+					System.out.println("Birth month is not valid.\n" + "Only numbers 1 through 12 are applicable.");
+				}
+				
+				switch (parsedBirthMonth)
 				{
 					case 1:
 					case 2:
@@ -112,7 +121,12 @@ public class FortuneTellerApp
 			if (favoriteColor.isEmpty())
 			{
 				System.out.println("No favorite color :( ");
-				favoriteColor = "N/A";
+				modeOfTransportation = "A cardboard box?";
+			}
+			else if (favoriteColor.equalsIgnoreCase(strAppQuit))
+			{
+				System.out.println(strTerminating);
+				System.exit(0);
 			}
 			else
 			{
@@ -141,15 +155,24 @@ public class FortuneTellerApp
 						break;
 					default:
 						System.out.println("You did not choose a color in the ROYGBIV");
-						modeOfTransportation = "Flying Saucers";
+						modeOfTransportation = "Flying Saucer";
 						break;
 				}
 			}
 
 			// siblings
 			System.out.println("How many siblings do you have?");
-			int numOfSiblings = input.nextInt();
-			switch (numOfSiblings)
+			String numOfSiblings = input.nextLine();
+			
+			if (numOfSiblings.equals(strAppQuit))
+			{
+				System.out.println(strTerminating);
+				System.exit(0);
+			}
+			
+			int parsedSiblings = Integer.parseInt(numOfSiblings);
+			
+			switch (parsedSiblings)
 			{
 				case 0:
 					vacationLocation = "San José, Costa Rica";
@@ -165,7 +188,7 @@ public class FortuneTellerApp
 					break;
 
 				default:
-					if (numOfSiblings > 3)
+					if (parsedSiblings > 3)
 					{
 						vacationLocation = "Sicily, Italy";
 						break;
